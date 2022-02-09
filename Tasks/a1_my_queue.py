@@ -3,10 +3,14 @@ My little Queue
 """
 from typing import Any
 
+# append() -> O(1)
+# pop(-1) -> O(1)
+# insert() -> O(N)
+# del 0(N)
 
 class Queue:
     def __init__(self):
-        ...  # todo для очереди можно использовать python list
+        self.queue = []  # начало очереди слева, конец справа
 
     def enqueue(self, elem: Any) -> None:
         """
@@ -15,16 +19,21 @@ class Queue:
         :param elem: element to be added
         :return: Nothing
         """
-        print(elem)
-        return None
+        self.queue.append(elem)
 
-    def dequeue(self) -> Any:
+    def dequeue(self) -> Any:  # O(N)
         """
         Return element from the beginning of the queue. Should return None if no elements.
 
         :return: dequeued element
         """
-        return None
+        if not self.queue:
+            return None
+
+        else:
+            print(self.queue[0])
+            self.queue.pop(0)
+            return self.queue
 
     def peek(self, ind: int = 0) -> Any:
         """
@@ -33,8 +42,11 @@ class Queue:
         :param ind: index of element (count from the beginning)
         :return: peeked element
         """
-        print(ind)
-        return None
+        if not 0 <= ind <= len(self.queue) - 1:
+            raise IndexError()
+
+        else:
+            return self.queue[ind]
 
     def clear(self) -> None:
         """
@@ -42,4 +54,16 @@ class Queue:
 
         :return: None
         """
-        return None
+        return self.queue.clear()
+
+
+if __name__ == '__main__':
+    qu = Queue()
+    qu.enqueue(1)
+    qu.enqueue(2)
+    qu.enqueue(3)
+
+    qu.dequeue()
+    print(qu.queue)
+    qu.dequeue()
+    print(qu.queue)
