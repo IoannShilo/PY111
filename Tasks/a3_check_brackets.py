@@ -6,4 +6,6 @@ def check_brackets(brackets_row: str) -> bool:
     :return: True if valid, False otherwise
     """
 
+
+
     return False
