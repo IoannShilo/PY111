@@ -8,7 +8,16 @@ from typing import Any
 
 class PriorityQueue:
     def __init__(self):
-        ...  # todo для очереди можно использовать python dict
+        """
+        одна очередь
+
+        начало справа
+        конец слева
+
+        enqueue - O(N)
+        dequeue - O(1)
+        """
+        self.queue_priority = []
 
     def enqueue(self, elem: Any, priority: int = 0) -> None:
         """
@@ -17,7 +26,21 @@ class PriorityQueue:
         :param elem: element to be added
         :return: Nothing
         """
-        return None
+        enqueue_item = {
+            "elem": elem,
+            "priority": priority
+        }
+        if not self.queue_priority:
+            self.queue_priority.append(enqueue_item)
+            return None
+
+        for index, current_item in enumerate(self.queue_priority):
+            if enqueue_item["priority"] >= current_item["priority"]:
+                self.queue_priority.insert(index, enqueue_item)
+                break
+
+        else:
+            self.queue_priority.append(enqueue_item)
 
     def dequeue(self) -> Any:
         """
@@ -25,9 +48,12 @@ class PriorityQueue:
 
         :return: dequeued element
         """
-        return None
+        if not self.queue_priority:
+            return None
 
-    def peek(self, ind: int = 0, priority: int = 0) -> Any:
+        return self.queue_priority.pop()["elem"] # O(1)
+
+    def peek(self, elem: int = 0, priority: int = 0) -> Any:
         """
         Allow you to see at the element in the queue without dequeuing it
 
@@ -42,4 +68,4 @@ class PriorityQueue:
 
         :return: None
         """
-        return None
+        self.queue_priority.clear()
