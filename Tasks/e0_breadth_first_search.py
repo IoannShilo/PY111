@@ -16,10 +16,11 @@ def bfs(g: nx.Graph, start_node: Hashable) -> List[Hashable]:
     # конец справа, начало слева
     wait_nodes = deque()  # очередь из узлов которые ожидают обхода
     wait_nodes.append(start_node)  # подожгли первый узел
+    visited_nodes[start_node] = True
 
     while wait_nodes:
         current_node = wait_nodes.popleft()  # достаем горящий узел, чтобы поджечь соседей, которые еще не горят
-        path_nodes.append(current_node) # формируем путь обхода
+        path_nodes.append(current_node) # формируем путь обхода. все сгоревшие узлы
         visited_nodes[current_node] = True # делаем узел сгоревшим
 
         neighbours = g[current_node]
